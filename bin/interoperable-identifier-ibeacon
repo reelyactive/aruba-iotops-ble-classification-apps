@@ -1,0 +1,90 @@
+#!/usr/bin/env lua
+package.path = './lua/?.lua;' .. package.path
+require "interoperable-identifier-ibeacon"
+
+-- Test data
+ADDRESS = "BA:DA:55:BE:AC:04"
+ADDRESS_TYPE = "BLE_MAC_ADDRESS_TYPE_RANDOM_STATIC"
+ADV_TYPE = ""
+ELEMENTS = {}
+
+-- Helper function to print all relevant object properties
+function printHandle(handle)
+  for key, value in pairs(handle) do
+    if key ~= "setExtend" and key ~= "setDeviceClassScopedDeviceId" then
+      print(key, value)
+    end
+  end
+end
+
+-- Begin emulation of IoT Operations functions/classes
+BLEData = {}
+
+function BLEData:new(super)
+  local class = {}
+
+  function class:setExtend(attribute, value)
+    class[attribute] = value
+  end
+
+  function class:setDeviceClassScopedDeviceId(device_class, device_id)
+    class[device_class] = device_id
+  end
+
+  return class
+end
+
+function ble_mac_address_is_private(addrType)
+  return false
+end
+-- End emulation of IoT Operations functions/classes
+
+-- Test MP3
+print("\r\n.mp3:")
+ELEMENTS[0xff] = "\x4c\x00\x02\x15" ..                         -- Apple iBeacon
+                 "\x49\x6f\x49\x44\x43\x4f\x44\x45\xb7\x3e" .. -- IoID prefix
+                 "\x2e\x2f\x2e\x6d\x70\x33" ..                 -- IoID type
+                 "\x00\x00" ..                                 -- Instance MSBs
+                 "\x01\x23" ..                                 -- Instance LSBs
+                 "\xb0"                                        -- TxPower
+printHandle(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))
+
+-- Test Unicode Code Points
+print("\r\nUnicode Code Points:")
+ELEMENTS[0xff] = "\x4c\x00\x02\x15" ..                         -- Apple iBeacon
+                 "\x49\x6f\x49\x44\x43\x4f\x44\x45\xb7\x3e" .. -- IoID prefix
+                 "\x55\x54\x46\x2d\x33\x32" ..                 -- IoID type
+                 "\x00\x01" ..                                 -- Instance MSBs
+                 "\xf9\x89" ..                                 -- Instance LSBs
+                 "\xb3"                                        -- TxPower
+printHandle(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))
+
+-- Test DirAct
+print("\r\nDirAct:")
+ELEMENTS[0xff] = "\x4c\x00\x02\x15" ..                         -- Apple iBeacon
+                 "\x49\x6f\x49\x44\x43\x4f\x44\x45\xb7\x3e" .. -- IoID prefix
+                 "\x44\x69\x72\x41\x63\x74" ..                 -- IoID type
+                 "\x00\xd1" ..                                 -- Instance MSBs
+                 "\x4a\xc7" ..                                 -- Instance LSBs
+                 "\xc0"                                        -- TxPower
+printHandle(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))
+
+-- Test Motion
+print("\r\nMotion:")
+ELEMENTS[0xff] = "\x4c\x00\x02\x15" ..                         -- Apple iBeacon
+                 "\x49\x6f\x49\x44\x43\x4f\x44\x45\xb7\x3e" .. -- IoID prefix
+                 "\x4d\x6f\x74\x69\x6f\x63" ..                 -- IoID type
+                 "\x00\x00" ..                                 -- Instance MSBs
+                 "\x00\x00" ..                                 -- Instance LSBs
+                 "\xbb"                                        -- TxPower
+printHandle(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))
+
+-- Test Button
+print("\r\nButton:")
+ELEMENTS[0xff] = "\x4c\x00\x02\x15" ..                         -- Apple iBeacon
+                 "\x49\x6f\x49\x44\x43\x4f\x44\x45\xb7\x3e" .. -- IoID prefix
+                 "\x42\x75\x74\x74\x6f\x6e" ..                 -- IoID type
+                 "\x00\x00" ..                                 -- Instance MSBs
+                 "\x00\x00" ..                                 -- Instance LSBs
+                 "\xb4"                                        -- TxPower
+printHandle(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))

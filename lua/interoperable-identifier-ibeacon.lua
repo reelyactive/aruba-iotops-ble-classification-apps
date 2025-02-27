@@ -89,9 +89,8 @@ function decode(address, addressType, advType, elements)
   end
 
   -- Set the device class and scoped deviceId
-  handle:setDeviceClass("InteroperaBLE Identifier")
-  handle:setDeviceClassScopedDeviceId("InteroperaBLE Identifier",
-                                      scoped_device_id)
+  handle:setDeviceClass("iBeacon")
+  handle:setDeviceClassScopedDeviceId("iBeacon", scoped_device_id)
 
   return handle
 end

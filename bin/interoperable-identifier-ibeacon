@@ -6,7 +6,7 @@ require "interoperable-identifier-ibeacon"
 
 -- Test data
 ADDRESS = "ba:da:55:be:ac:04"
-ADDRESS_TYPE = "MAC_ADDRESS_TYPE_STATIC"
+ADDRESS_TYPE = "BLE_MAC_ADDRESS_TYPE_RANDOM_STATIC"
 ADV_TYPE = "BLE_FRAME_TYPE_ADV_IND"
 ELEMENTS = {}
 

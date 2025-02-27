@@ -58,9 +58,11 @@ function decode(address, addressType, advType, elements)
 
   -- Set common attribute for InteroperaBLE Identifier    
   handle:setExtend("txPower", proximity_tx_power)
+  --handle:setCalibratedPower(proximity_tx_power) -- TODO: use when supported
 
   -- DirAct (uses DirAct device class)
   if entity_uuid_suffix == "\x44\x69\x72\x41\x63\x74" then
+    handle:setDeviceClass("DirAct")
     handle:setDeviceClassScopedDeviceId("DirAct", instance_id_hex)
     return handle
   end
@@ -77,6 +79,7 @@ function decode(address, addressType, advType, elements)
 
   -- Motion detection
   if entity_uuid_suffix == "\x4d\x6f\x74\x69\x6f\x63" then
+    handle:setMotion(true)
     handle:setExtend("isMotionDetected", true)
   end
 
@@ -86,7 +89,9 @@ function decode(address, addressType, advType, elements)
   end
 
   -- Set the device class and scoped deviceId
-  handle:setDeviceClassScopedDeviceId("iBeacon", scoped_device_id)
+  handle:setDeviceClass("InteroperaBLE Identifier")
+  handle:setDeviceClassScopedDeviceId("InteroperaBLE Identifier",
+                                      scoped_device_id)
 
   return handle
 end

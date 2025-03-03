@@ -2,7 +2,7 @@
 package.path = './lua/?.lua;' .. package.path
 require "utils"
 require "decoderAPI"
-require "interoperable-identifier-ibeacon"
+require "interoperable-identifier"
 
 -- Test data
 ADDRESS = "ba:da:55:be:ac:04"

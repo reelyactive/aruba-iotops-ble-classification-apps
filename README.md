@@ -9,13 +9,13 @@ Classification Apps
 
 The following classification apps are included.
 
-### interoperable-identifier-ibeacon
+### interoperable-identifier
 
-Classifies [InteroperaBLE Identifiers](https://reelyactive.github.io/interoperable-identifier/) embedded in iBeacon packets.  See the [lua/interoperable-identifier-ibeacon.lua](lua/interoperable-identifier-ibeacon.lua) script.
+Classifies [InteroperaBLE Identifiers](https://reelyactive.github.io/interoperable-identifier/) embedded in iBeacon or Eddystone-UID packets.  See the [lua/interoperable-identifier.lua](lua/interoperable-identifier.lua) script.
 
 To test the classifier, from the root of this repository, run the following:
 
-    bin/interoperable-identifier-ibeacon
+    bin/interoperable-identifier
 
 The following InteroperaBLE Identifier cases will be tested, with properties printed to the console:
 - .mp3

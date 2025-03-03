@@ -25,6 +25,16 @@ The following InteroperaBLE Identifier cases will be tested, with properties pri
 - Button
 
 
+Lua Style Guide
+---------------
+
+The following practices are observed by [reelyActive](https://www.reelyactive.com) for coding Aruba IoT Operations classification apps in Lua:
+- two spaces for indentation
+- lowerCamelCase for variable names
+- SCREAMING_SNAKE_CASE for constants
+- 80-character limit
+
+
 Lua Installation
 ----------------
 

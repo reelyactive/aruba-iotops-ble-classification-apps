@@ -92,9 +92,10 @@ function decode(address, addressType, advType, elements)
 
   -- DirAct (uses DirAct device class)
   if elidedEntityUuid == "\x49\x6f\x49\x44\x44\x69\x72\x41\x63\x74" then
-    handle:setDeviceClass("DirAct")
-    handle:setDeviceClassScopedDeviceId("DirAct", instanceIdHex)
-    return handle
+    -- TODO: request DirAct device class
+    --handle:setDeviceClass("DirAct")
+    --handle:setDeviceClassScopedDeviceId("DirAct", instanceIdHex)
+    --return handle
   end
 
   -- Local .mp3 file
@@ -125,8 +126,8 @@ function decode(address, addressType, advType, elements)
   end
 
   -- Set the device class and scoped deviceId
-  handle:setDeviceClass("iBeacon") -- TODO: change class when available
-  handle:setDeviceClassScopedDeviceId("iBeacon", scopedDeviceId)
+  handle:setDeviceClass("interoperableidentifier")
+  handle:setDeviceClassScopedDeviceId("interoperableidentifier", scopedDeviceId)
   return handle
 
 end

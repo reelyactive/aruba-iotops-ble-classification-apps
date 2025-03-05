@@ -59,7 +59,7 @@ function decode(address, addressType, advType, elements)
 
   -- Attempt to decode Eddystone-UID
   ----------------------------------
-  if serviceData ~= nil and #serviceData == 22 then
+  if serviceData ~= nil and #serviceData >= 20 then
 
     -- Determine the company code, frame type and proximity UUID prefix
     local serviceUuid = string.unpack("<I2", (string.sub(serviceData, 1, 2)))
@@ -84,6 +84,11 @@ function decode(address, addressType, advType, elements)
     instanceIdHex = string.format("%07x", instanceId)
     txPower = rangingData
 
+  end
+
+  -- An InteroperaBLE Identifier could not be decoded
+  if elidedEntityUuid == nil then
+    return handle
   end
 
   -- Set common attribute for InteroperaBLE Identifier

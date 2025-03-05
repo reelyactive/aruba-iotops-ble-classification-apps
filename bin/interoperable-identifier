@@ -61,15 +61,14 @@ ELEMENTS[0xff] = "\x4c\x00\x02\x15" ..                         -- Apple iBeacon
                  "\xcf"                                        -- TxPower
 printTable(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))
 
--- Test Unicode Code Points as Eddystone-UID
+-- Test Unicode Code Points as Eddystone-UID (without RFU)
 print("\r\ndecode(Unicode Code Points) as Eddystone-UID")
 print("============================================")
 ELEMENTS[0x16] = "\xaa\xfe\x00" ..                             -- Eddystone-UID
                  "\xf8" ..                                     -- Ranging
                  "\x49\x6f\x49\x44" ..                         -- IoID prefix
                  "\x55\x54\x46\x2d\x33\x32" ..                 -- IoID type
-                 "\x00\x00\x00\x01\xf9\x89" ..                 -- Instance
-                 "\x00\x00"                                    -- RFU
+                 "\x00\x00\x00\x01\xf9\x89"                    -- Instance
 ELEMENTS[0xff] = nil
 printTable(decode(ADDRESS, ADDRESS_TYPE, ADV_TYPE, ELEMENTS))
 

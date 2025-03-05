@@ -110,7 +110,7 @@ function decode(address, addressType, advType, elements)
 
   -- Unicode Code Point
   if elidedEntityUuid == "\x49\x6f\x49\x44\x55\x54\x46\x2d\x33\x32" then
-    handle:setExtend("unicodeCodePoint", utf8.char(instanceId))
+    handle:setExtend("unicodeCodePoints", utf8.char(instanceId))
   end
 
   -- Motion detection
